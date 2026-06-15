@@ -1,0 +1,53 @@
+
+name: Security Checks
+
+on:
+  pull_request:
+    branches: [main, master]
+  push:
+    branches: [main, master]
+
+jobs:
+  security-scan:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      pull-requests: read
+      security-events: write
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Audit npm packages
+        run: npm audit --audit-level=moderate
+
+      - name: Run ESLint
+        run: npx eslint .
+
+      - name: Run TypeScript type checking
+        run: npx tsc --noEmit
+
+      - name: Detect secrets in code
+        uses: gitleaks/gitleaks-action@v2
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Verify lockfile exists
+        run: |
+          if [ ! -f package-lock.json ]; then
+            echo 'FAIL: package-lock.json is required.'
+            exit 1
+          fi
+
+      - name: Run Playwright tests
+        run: npx playwright test --project=chromium
