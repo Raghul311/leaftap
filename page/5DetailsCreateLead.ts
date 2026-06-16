@@ -11,7 +11,7 @@ export class CreateLeadPage extends lead{
 
     async clickCreate(){
         await this.page.click(locators.clcikCreate);
-        await this.page.waitForTimeout(10000);
+        await this.page.waitForLoadState('networkidle');
     }
 
     async verifyLeadCreated(){
