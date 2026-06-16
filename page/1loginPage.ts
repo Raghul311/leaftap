@@ -17,7 +17,6 @@ export class login{
     }
     async clickLogin(){
         await this.page.click(locators.clickLogin)
-        await this.page.waitForTimeout(5000);
     }
 }
 

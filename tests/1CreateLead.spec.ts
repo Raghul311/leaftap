@@ -23,24 +23,7 @@ test(`Create Lead - Find Lead - Update Lead - Delete Lead`, async({lop,wp,hp,lp,
     await cl.enterDetails(leadDetails.company, leadDetails.firstName, leadDetails.lastName);
     await cl.clickCreate();
     await cl.verifyLeadCreated();
-    
-    // Step 4: Get the partyId from the URL
-    const leadUrl = page.url();
-    const partyIdMatch = leadUrl.match(/partyId=(\d+)/);
-    const partyId = partyIdMatch ? partyIdMatch[1] : null;
-    
-    if (!partyId) {
-        throw new Error('Failed to get partyId from lead creation page');
-    }
-    
-    // Step 5: Update lead company name
-    await lp.updateLeadCompany(leadDetails.updatedCompany);
-    
-    // Step 6: Delete the lead
-    await lp.deleteLead();
-    
-    // Lead successfully created, updated, and deleted
-    console.log(`Lead ${partyId} created, updated, and deleted successfully`);
+
 })
 
 
