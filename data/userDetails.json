@@ -1,11 +1,7 @@
 [
     {
-        "tcID":"TC01",
-        "userName":"demoSalesManager",
-        "password":"crmsfa"
-    },
-    {
         "tcID":"TC02",
+        "url":"http://leaftaps.com/opentaps/control/main",
         "userName":"demoCSR",
         "password":"crmsfa"
     }

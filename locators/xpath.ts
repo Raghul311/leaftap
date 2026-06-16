@@ -5,13 +5,18 @@ export const locators={
     "clcikCRMSFA":`//a[contains(text(),"CRM")]`,
     "clickLead":`//a[text()="Leads"]`,
     "clickCreateLead":`//a[text()="Create Lead"]`,
+    "clickFindLead":`//a[text()="Find Leads"]`,
     "Cname":`#createLeadForm_companyName`,
     "Fname":`#createLeadForm_firstName`,
     "Lname":`#createLeadForm_lastName`,
     "saluation": `#createLeadForm_dataSourceId`,
     "clcikCreate":`.smallSubmit`,
-
-
-
-
+    "findLeadCompany":`#firstName`,
+    "findLeadFirstName":`#firstName`,
+    "findLeadLastName":`#lastName`,
+    "clickFindButton":`//button[contains(text(),"Find Leads")]`,
+    "leadIdLink":`//a[contains(text(),"")]`,
+    "updateButton":`.smallSubmit`,
+    "deleteButton":`//a[contains(text(),"Delete")]`,
+    "confirmDeleteButton":`//input[@value="Delete"]`,
 }

@@ -4,6 +4,10 @@ import { locators } from "../locators/xpath";
 export class welcomePage extends login{
 
     async clickCRMSFA(){
+        await this.page.waitForLoadState('networkidle');
         await this.page.click(locators.clcikCRMSFA);
+        
+
+        
     }
 }

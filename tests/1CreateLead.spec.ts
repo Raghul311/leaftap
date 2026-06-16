@@ -1,19 +1,29 @@
-// import { test } from "@playwright/test";
 import {test} from "../utils/customeFixtures"
-import { CreateLeadPage } from "../page/5DetailsCreateLead";
 import credentials from "../data/userDetails.json"
-import dotenv from "dotenv"
-dotenv.config({path:"data/prod.env"})
 
-test(`Create Lead`, async({lop,wp,hp,lp,cl})=>{
-    //const cl= new CreateLeadPage(page);
-    await lop.loadURL(process.env.ProdURL as string);
-    await lop.cred(credentials[1].userName,credentials[1].password);
+const leadDetails = {
+    company: "TestLeaf",
+    firstName: "John",
+    lastName: "Smith",
+    updatedCompany: "Krishiv"
+};
+
+test(`Create Lead - Find Lead - Update Lead - Delete Lead`, async({lop,wp,hp,lp,cl,page})=>{
+    // Step 1: Login
+    await lop.loadURL(credentials[0].url);
+    await lop.cred(credentials[0].userName, credentials[0].password);
     await lop.clickLogin();
+    
+    // Step 2: Navigate to CRM/SFA
     await wp.clickCRMSFA();
+    
+    // Step 3: Create Lead
     await hp.createLead();
     await lp.clickCreateLead();
-    await cl.enterDetails();
+    await cl.enterDetails(leadDetails.company, leadDetails.firstName, leadDetails.lastName);
     await cl.clickCreate();
+    await cl.verifyLeadCreated();
 
 })
+
+
