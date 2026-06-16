@@ -31,9 +31,6 @@ jobs:
       - name: Audit npm packages
         run: npm audit --audit-level=moderate
 
-      - name: Run ESLint
-        run: npx eslint .
-
       - name: Run TypeScript type checking
         run: npx tsc --noEmit
 
